@@ -1,0 +1,59 @@
+<div class="wrapper">
+    <h3>Édition d'utilisateur</h3>
+    <form name="userEditionCtrl.userForm" ng-submit="userEditionCtrl.saveUser()">
+        <user-lock-control lock="userEditionCtrl.user.lock"></user-lock-control><br/>
+        <div class="form-group floating-label-wrapper">
+            <input floating-label
+            ng-model="userEditionCtrl.user.name"
+            type="text"
+            class="form-control"
+            name="username"
+            uib-tooltip="Merci de renseigner un nom d'utilisateur"
+            tooltip-placement="top"
+            tooltip-trigger="mouseenter"
+            tooltip-enable="!userEditionCtrl.userForm.username.$valid && userEditionCtrl.userForm.username.$touched"
+            required/>
+             <div class="floating-label">Nom d'utilisateur</div>
+        </div>
+        <div class="form-group floating-label-wrapper">
+            <input
+                floating-label
+                name="email"
+                ng-model="userEditionCtrl.user.email"
+                type="email"
+                class="form-control"
+                id="email"
+                required
+                uib-tooltip="Merci de renseigner un e-mail valide"
+                tooltip-placement="top"
+                tooltip-trigger="mouseenter"
+                tooltip-enable="!userEditionCtrl.userForm.email.$valid && userEditionCtrl.userForm.email.$touched"/>
+                 <div class="floating-label">Adresse e-mail</div>
+        </div>
+        <div class="form-group floating-label-wrapper">
+            <input
+                name="password"
+                ng-model="userEditionCtrl.user.password"
+                type="password"
+                class="form-control"
+                id="password"
+                ng-required="!userEditionCtrl.user._id"
+                uib-tooltip="Merci de renseigner un mot de passe valide"
+                tooltip-placement="top"
+                tooltip-trigger="mouseenter"
+                tooltip-enable="!userEditionCtrl.user._id && !userEditionCtrl.userForm.password.$valid && userEditionCtrl.userForm.password.$touched"
+                floating-label/>
+                 <div class="floating-label">Mot de passe</div>
+             </div><br/>
+        <div class="form-group">
+            <label for="role">Permissions</label>
+            <select ng-model="userEditionCtrl.user.permissions" class="form-control" id="role" multiple required>
+                <option value="admin">Administrateur</option>
+                <option value="employee">Employé</option>
+            </select>
+        </div>
+        <button ng-disabled="!userEditionCtrl.userForm.$valid" type="submit" class="btn  btn-primary">
+            <i class="glyphicon glyphicon-floppy-disk"></i> Enregistrer</button>
+        <button type="button" ng-click="userEditionCtrl.endUpdate()" class="btn  btn-default">Annuler</button>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+<div>
+    <div ng-if="genericRoomCtrl.configuration.music && genericRoomCtrl.configuration.music.host" class="roomSection">
+        <div class="section-banner">
+            <div class="section-title">Music
+            </div>
+        </div>
+        <div ng-if="genericRoomCtrl.configuration.music.plug">
+            <div class="btn btn-sm btn-success " ng-click="turnOnMusic()"><span class="glyphicon glyphicon-off"></span> On</div>
+            <div class="btn btn-sm btn-danger " ng-click="turnOffMusic()"><span class="glyphicon glyphicon-off"></span> Off</div>
+        </div>
+        <br/><br/>
+        <div class = "form-inline">
+                <select class="form-control" id="form-small" ng-model="selectedPlaylist">
+                    <option  ng-repeat="playlist in globalPlaylists" value="{{playlist.file}}">{{playlist.label}}</option>
+                    <option  ng-repeat="playlist in playlists" value="{{playlist.file}}">{{playlist.label}}</option>
+                </select>
+                <div class="btn btn-primary btn-xs" ng-click="playPlaylist(selectedPlaylist)"><span class="glyphicon glyphicon-play"></span></div>
+        </div><br/>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="btn btn-primary btn-xs">
+                <span class="glyphicon glyphicon-minus" ng-click="volumeDown()"></span>&nbsp;&nbsp;
+                <span class="glyphicon glyphicon-volume-up"></span>&nbsp;&nbsp;
+                <span class="glyphicon glyphicon-plus" ng-click="volumeUp()"></span>
+
+            </div>
+        </div><br/>
+	<div>Sleep :
+		 <input id="form-xs" type="number" class="input-sm form-control input" ng-model="genericRoomCtrl.configuration.music.sleepMinutes"/>
+		 <div class="btn btn-sm btn-primary" ng-click="setSleepMusic()">Set</div>
+	</div><br/>
+        <div>
+            <div class="btn btn-primary btn-xs" ng-click="previousSong()"><span class="glyphicon glyphicon-step-backward"></span></div>
+            <div class="btn btn-primary btn-xs" ng-click="pauseSong()"><span class="glyphicon glyphicon-pause"></span></div>
+            <div class="btn btn-primary btn-xs" ng-click="playSong()"><span class="glyphicon glyphicon-play"></span></div>
+            <div class="btn btn-primary btn-xs" ng-click="stopSong()"><span class="glyphicon glyphicon-stop"></span></div>
+            <div class="btn btn-primary btn-xs" ng-click="nextSong()"><span class="glyphicon glyphicon-step-forward"></span></div>
+        </div>
+        <p ng-if="playingMusic">
+            {{playingMusic.artist}} <br/> {{playingMusic.title}}
+        </p>
+    </div>
+
+    <alarm room="genericRoomCtrl.configuration"></alarm>
+
+    <div class="roomSection" ng-if="genericRoomCtrl.configuration.plugs && genericRoomCtrl.configuration.plugs.length>0">
+        <div class="section-banner"><div class="section-title">Plugs
+        </div> </div>
+        <table class="table-condensed">
+            <tr ng-repeat="plug in genericRoomCtrl.configuration.plugs">
+                <td><b>{{plug.label}} : </b></td>
+                <td><div ng-click="genericRoomCtrl.switchPlug(plug,'on')" class="btn btn-sm btn-success "><span class="glyphicon glyphicon-off"></span> On</div></td>
+                <td><div  ng-click="genericRoomCtrl.switchPlug(plug,'off')" class="btn btn-sm btn-danger "><span class="glyphicon glyphicon-off"></span> Off</div></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="roomSection" ng-if="genericRoomCtrl.configuration.stores && genericRoomCtrl.configuration.stores.length>0">
+        <div class="section-banner"><div class="section-title">Stores
+        </div> </div>
+        <div ng-repeat="store in genericRoomCtrl.configuration.stores">
+        <b>{{store.label}} : </b>
+          <table class="table-condensed">
+              <tr>
+                  <td><div ng-click="genericRoomCtrl.actionStore(store,'up')" class="btn btn-sm btn-default "><span class="glyphicon glyphicon-arrow-up"></span> Up</div></td>
+                  <td><div  ng-click="genericRoomCtrl.actionStore(store,'down')" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-arrow-down"></span> Down</div></td>
+                  <td><div  ng-click="genericRoomCtrl.actionStore(store,'fulldown')" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-download-alt"></span> Full Down</div></td>
+              </tr>
+          </table>
+          </div>
+    </div>
+</div>

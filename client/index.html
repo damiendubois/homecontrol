@@ -1,0 +1,93 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible", content="IE=edge,chrome=1">
+    <meta name="viewport", content="width=device-width, initial-scale=1.0">
+
+    <!-- enable html5mode routes -->
+    <base href="/">
+
+    <title>homecontrol</title>
+    <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="app/app.css">
+    <!-- endinject -->
+    <!-- inject:vendor:js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
+    <script src="bower_components/ng-table/dist/ng-table.js"></script>
+    <script src="bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
+    <script src="bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/file-saver/FileSaver.js"></script>
+    <script src="bower_components/angular-recaptcha/release/angular-recaptcha.js"></script>
+    <script src="bower_components/angular-toggle-switch/angular-toggle-switch.js"></script>
+    <!-- endbower -->
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <script src="app/users/users.js"></script>
+    <script src="app/users/components/user-list/user-list.component.js"></script>
+    <script src="app/users/components/user-list/user-filter.js"></script>
+    <script src="app/users/components/user-edition/user-edition.component.js"></script>
+    <script src="app/users/components/lock-control/lock-control.component.js"></script>
+    <script src="app/room/components/generic-room/generic-room.component.js"></script>
+    <script src="app/room/components/alarm/alarm.service.js"></script>
+    <script src="app/room/components/alarm/alarm.component.js"></script>
+    <script src="app/login/login.js"></script>
+    <script src="app/login/components/login-form/login-form.component.js"></script>
+    <script src="app/login/components/forgot-password/forgot-password.component.js"></script>
+    <script src="app/layout/layout.js"></script>
+    <script src="app/layout/components/sidebar/sidebar.component.js"></script>
+    <script src="app/layout/components/header-bar/header-bar.component.js"></script>
+    <script src="app/layout/components/breadcrumb/breadcrumb.component.js"></script>
+    <script src="app/app.js"></script>
+    <script src="components/input-focus/input-focus.js"></script>
+    <script src="components/cwtGui.js"></script>
+    <script src="components/floating-label/floating-label.directive.js"></script>
+    <script src="app/users/user-service.js"></script>
+    <script src="app/room/room.js"></script>
+    <script src="app/room/rf-service.js"></script>
+    <script src="app/profil/profil.js"></script>
+    <script src="app/profil/profil.component.js"></script>
+    <script src="app/profil/profil-service.js"></script>
+    <script src="app/profil/connexion-filter.js"></script>
+    <script src="app/login/authentication-service.js"></script>
+    <script src="app/login/authentication-interceptor.js"></script>
+    <script src="app/layout/layout-ctrl.js"></script>
+    <script src="components/widget.js"></script>
+    <script src="components/widget-header.js"></script>
+    <script src="components/widget-footer.js"></script>
+    <script src="components/widget-body.js"></script>
+    <script src="components/search-service.js"></script>
+    <script src="components/popover-closable.js"></script>
+    <script src="components/notice-service.js"></script>
+    <script src="components/money.filter.js"></script>
+    <script src="components/loading.js"></script>
+    <script src="components/highlight-multiple.js"></script>
+    <script src="components/date.filter.js"></script>
+    <script src="components/cache-service.js"></script>
+    <script src="components/address.filter.js"></script>
+    <script src="app/ngConstants.js"></script>
+    <script src="app/home-definition-service.js"></script>
+    <!-- endinject -->
+  </head>
+
+  <body>
+
+
+    <div ui-view></div>
+
+
+  </body>
+</html>

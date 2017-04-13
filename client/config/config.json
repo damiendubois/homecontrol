@@ -1,0 +1,10 @@
+{
+  "mock":
+  	{
+  		"serverBaseUrl": "http://localhost:8090/api"
+  	},
+  "development":
+  	{
+		"serverBaseUrl": "/api"
+	}
+}

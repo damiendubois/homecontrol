@@ -1,0 +1,82 @@
+<div class="wrapper">
+    <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-profil-edition"></span>
+    <form name="profilCtrl.profilForm" ng-submit="profilCtrl.saveProfil()">
+        <h3>Votre profil</h3>
+        <br>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group floating-label-wrapper">
+                    <input disabled ng-model="profilCtrl.editedUser.name" type="text" class="form-control" id="username" floating-label>
+                    <div class="floating-label">Nom d'utilisateur</div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group floating-label-wrapper">
+                    <input name="email" ng-model="profilCtrl.editedUser.email" type="email" class="form-control" id="email"
+                      required uib-tooltip="Merci de renseigner un email valide"
+                      tooltip-placement="top" tooltip-trigger="mouseenter"
+                      tooltip-enable="!profilCtrl.profilForm.email.$valid && profilCtrl.profilForm.email.$touched"
+                      floating-label/>
+                    <div class="floating-label">Adresse e-mail</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group floating-label-wrapper">
+                    <input name="password" ng-model="profilCtrl.editedUser.password" type="password" class="form-control" id="password"
+                    required uib-tooltip="Pour modifier votre profil, merci d'entrer votre mot de passe actuel."
+                    tooltip-placement="top" tooltip-trigger="mouseenter"
+                    tooltip-enable="!profilCtrl.editedUser.password"
+                    floating-label />
+                    <div class="floating-label">Mot de passe</div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group floating-label-wrapper">
+                    <input name="newPassword" ng-model="profilCtrl.editedUser.newPassword" type="password" class="form-control" id="newPassword" floating-label />
+                    <div class="floating-label">Nouveau mot de passe</div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="form-group">
+                <label>Connexions actives</label>
+                <table class="table table-stripped table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Début de la session</th>
+                            <th>IP</th>
+                            <th>Navigateur</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="connexion in profilCtrl.editedUser.connexionTokens | connexionFilter">
+                            <td>{{connexion.creationDate | date:'medium'}}</td>
+                            <td>{{connexion.ip}}</td>
+                            <td>{{connexion.userAgent}}</td>
+                            <td>
+                                <button type="button" ng-click="profilCtrl.deleteConnexion(connexion)" class="btn  btn-danger" uib-tooltip="Supprimer">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <span uib-tooltip="Pour modifier votre profil, merci d'entrer votre mot de passe actuel." tooltip-placement="top" tooltip-trigger="mouseenter">
+                <button
+                        type="submit"
+                        class="btn  btn-primary">
+                     <i class="glyphicon glyphicon-floppy-disk"></i> Enregistrer
+                </button>
+            </span>
+            <button type="button" ng-click="profilCtrl.cancel()" class="btn  btn-default">Annuler</button>
+        </div>
+    </form>
+</div>

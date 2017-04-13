@@ -1,0 +1,61 @@
+<div class="wrapper">
+    <h3>Liste des utilisateurs</h3><br/>
+    <div class="row table-filters">
+        <div class="col-xs-12 col-md-6 col-lg-4">
+            <div class="form-group floating-label-wrapper">
+                <input id="searchFilter"
+                    ng-model="userListCtrl.tableFilters.search"
+                    type="text"
+                    class="form-control"
+                    floating-label
+                    />
+                <div class="floating-label">Rechercher</div>
+            </div>
+        </div>
+        <div class="col-xs-11 col-md-4 col-md-offset-1 col-lg-offset-5 col-lg-2 form-group">
+            <button class="pull-right btn  btn-primary" ui-sref="app.users.edition">
+                <i class="glyphicon glyphicon-plus"></i> Ajouter un utilisateur
+            </button>
+        </div>
+        <div class="col-xs-1">
+          <button class="pull-right btn  btn-default" uib-tooltip="Rafraichir la liste" ng-click="userListCtrl.refreshUserList()">
+              <i class="glyphicon glyphicon-refresh"></i>
+          </button>
+        </div>
+    </div>
+    <div class="table-responsive ">
+        <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-table-user"></span>
+        <table ng-table="userListCtrl.userTableParams" class="table table-hover" >
+            <tr  ng-repeat="user in $data" ng-class="{'bg-danger': user.lock.isLocked || user.lock.adminLock}">
+                <td data-title="'Nom d\'utilisateur'" sortable="'name'" ng-bind-html="user.name|highlightMultiple:userListCtrl.tableFilters.search"></td>
+                <td data-title="'E-mail'" sortable="'email'" ng-bind-html="user.email|highlightMultiple:userListCtrl.tableFilters.search"></td>
+                <td data-title="'Permissions'">
+                    <span ng-repeat="permission in user.permissions track by $index">
+											<span ng-bind-html="permission|highlightMultiple:tableFilters.search"></span>
+                    <br ng-if="$index!=user.permissions.length-1" />
+                    </span>
+                </td>
+                <td>
+                    <div class="pull-right">
+                        <button ui-sref="app.users.edition({id:user._id})" class="btn  btn-primary" uib-tooltip="Editer">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </button>
+                        <button class="btn  btn-danger" uib-tooltip="Supprimer" uib-popover-template="'userDeletionPopover.html'" popover-title="Suppression de {{user.name}}" popover-placement="left" popover-trigger="open" popover-toggle>
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/ng-template" id="userDeletionPopover.html">
+    <p>
+        Êtes vous sûr de vouloir supprimer l'utilisateur {{user.name}}
+        <br>
+        <br>
+        <button ng-click="userListCtrl.deleteUser(user)" class="btn  btn-danger"><i class="glyphicon glyphicon-trash">
+                	</i>Supprimer</button>
+        <button ng-click="toggle()" class="btn  btn-default">Annuler</button>
+    </p>
+</script>

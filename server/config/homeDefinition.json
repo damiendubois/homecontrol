@@ -1,0 +1,94 @@
+{
+        "musicSources":[
+          {
+            "label":"homecontrol",
+            "pathFromServer":"/media/",
+            "pathFromMusicPlayer":"smb://raspberypi.local"
+          }
+        ],
+        "rooms" : [
+            {
+                "id" : "Room",
+                "alarm": true,
+                "label" : "Chambre",
+                "icon":"glyphicon glyphicon-bed",
+                "music" :
+                    {
+                        "host": "room.local",
+                        "plug" :
+                            {
+                                "FMCode" : "00011",
+                                "plugNumber" : "1"
+                            }
+                    },
+                "plugs" :
+                        [
+                        {
+                            "label": "Plafonnier",
+                            "FMCode": "00011",
+                            "plugNumber" : "3"
+                        },
+                        {
+                            "label": "Chevet Damien",
+                            "FMCode": "00011",
+                            "plugNumber" : "4"
+                        },
+                        {
+                            "label": "Chevet Laura",
+                            "FMCode": "00011",
+                            "plugNumber" : "2"
+                        },
+                        {
+                            "label": "TV",
+                            "FMCode": "00011",
+                            "plugNumber" : "1"
+                        }
+                          ]
+            },
+            {
+                "label" : "Bureau",
+                "alarm": false,
+                "icon": "glyphicon glyphicon-file",
+                  "id" : "office",
+                    "plugs" :
+                            [
+                            {
+                                "label": "Work Station",
+                                "FMCode": "01111",
+                                "plugNumber" : "4"
+                            },
+                            {
+                                "label": "Plafonnier",
+                                "FMCode": "01111",
+                                "plugNumber" : "1"
+                            }
+                              ]
+            },
+            {
+                "label" : "Salon",
+                "alarm": false,
+                "icon": " glyphicon glyphicon-facetime-video",
+                  "id" : "livingroom",
+                "plugs" :
+                            [
+                            {
+                                "label": "Lumière piano",
+                                "FMCode": "01111",
+                                "plugNumber" : "4"
+                            },
+                            {
+                                "label": "Lumière canapé",
+                                "FMCode": "01111",
+                                "plugNumber" : "1"
+                            }
+                          ],
+              "stores" : [
+                {
+                  "label" : "Ecran projection",
+                  "code": "54791",
+                  "plugId": "1"
+                }
+              ]
+            }
+        ]
+    }

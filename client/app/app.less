@@ -1,0 +1,44 @@
+
+@import  "../bower_components/bootstrap/less/bootstrap.less";
+@import  "../bower_components/ng-table/dist/ng-table.less";
+@import (inline) "../bower_components/rdash-ui/dist/css/rdash.css"; /*keep it first position to be able to override it*/
+@import (inline) "../bower_components/angular-toastr/dist/angular-toastr.css"; /*keep it first position to be able to override it*/
+@import  "../bower_components/flag-icon-css/less/flag-icon.less";
+@import  (inline) "../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.css";
+@import "./login/login.less";
+@import "./users/users.less";
+@import "./layout/layout.less";
+@import "./layout/components/sidebar/sidebar.less";
+@import "./layout/components/breadcrumb/breadcrumb.less";
+@import "./users/components/user-list/user-list.component.less";
+@import "../components/floating-label/floating-label.less";
+@import "./layout/components/header-bar/header-bar.less";
+@import "./room/room.less";
+
+@flag-icon-css-path:'/fonts/flags';
+
+body {
+  background-color: floralwhite;
+}
+
+.navbar-collapse {
+  overflow-y: visible;
+}
+
+html {
+	overflow-y:auto;
+}
+
+.wrapper{
+	margin : 20px;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: @brand-danger;
+ }
+
+
+.modal-full {
+    width: 90%;
+    min-width:500px;
+}

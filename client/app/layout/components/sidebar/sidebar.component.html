@@ -1,0 +1,50 @@
+<div id="sidebar-wrapper">
+    <ul class="sidebar">
+        <li class="sidebar-main">
+            <a ng-click="sidebarCtrl.toggleSidebar()">
+            <img src="img/logo-cawita.png">
+            <span class="menu-icon glyphicon glyphicon-menu-hamburger"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+
+        <div ng-repeat="sidebarItem in sidebarCtrl.items" ng-if="!sidebarCtrl.stateIncludes('app.login') && !sidebarCtrl.stateIncludes('app.forgotPassword')" >
+            <li class="sidebar-list" ng-class="{active: sidebarCtrl.stateIncludes('app.rooms')&&  sidebarCtrl.getActiveRoom()==sidebarItem.id}">
+                <a ui-sref="app.rooms({id:sidebarItem.id})">
+                    <i class="menu-icon  {{sidebarItem.icon}}"></i>&nbsp;
+                    <span class="menu-label">{{sidebarItem.label}}  </span>
+                </a>
+            </li>
+        </div>
+
+        <div ng-if="!sidebarCtrl.stateIncludes('app.login') && !sidebarCtrl.stateIncludes('app.forgotPassword')">
+            <li ng-show="sidebarCtrl.hasPermission('admin')" class="sidebar-list" ng-class="{active: sidebarCtrl.stateIncludes('app.users')}">
+                <a ui-sref="app.users.list">
+                    <i class="menu-icon glyphicon glyphicon-user"></i>&nbsp;
+                    <span class="menu-label">Utilisateurs  </span>
+                </a>
+            </li>
+        </div>
+
+        <div ng-if="sidebarCtrl.stateIncludes('app.login') || sidebarCtrl.stateIncludes('app.forgotPassword')">
+            <li class="sidebar-list active">
+                <a ui-sref="app.login">
+                    <i class="menu-icon glyphicon glyphicon-off"></i>&nbsp;
+                    <span class="menu-label">Connection  </span>
+                </a>
+            </li>
+        </div>
+    </ul>
+    <div class="sidebar-footer">
+        <div class="col-xs-6">
+            <a href="http://www.cawita.com/" target="_blank">
+            Cawita
+          </a>
+        </div>
+        <div class="col-xs-6">
+            <a href="mailto:damien.dubois@cawita.com">
+            Support
+          </a>
+        </div>
+    </div>
+</div>

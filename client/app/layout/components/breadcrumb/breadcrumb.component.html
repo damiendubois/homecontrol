@@ -1,0 +1,7 @@
+<div>
+  <span class="breadcrumb-links" ng-repeat="breadCrumbItem in breadcrumbCtrl.breadCrumbPath">
+    <a ng-if="breadCrumbItem.abstract || $last"  ng-class="{active:$last}">{{breadCrumbItem.breadcrumb}}</a>
+    <a ng-if="!breadCrumbItem.abstract && !$last" ui-sref="{{breadCrumbItem.name}}">{{breadCrumbItem.breadcrumb}}</a>
+    <span class="breadcrumb-separator" ng-if="!$last">></span>
+  </span>
+</div>

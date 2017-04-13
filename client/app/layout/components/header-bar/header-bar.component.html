@@ -1,0 +1,39 @@
+<div class="row header">
+    <div class="col-xs-12">
+        <cwt-language-picker class="language-picker"></cwt-language-picker>
+        <div class="pull-right">
+            <div class="user-setting">
+                <div ng-if="headerBarCtrl.isUserSet()" class="item dropdown" uib-dropdown>
+                    <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                        <img src="img/profile.png">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-header">
+                            {{headerBarCtrl.getUser().name}}
+                        </li>
+                        <li class="divider"></li>
+                        <li class="link">
+                            <a ng-click="headerBarCtrl.openProfil()">
+                                <i class="glyphicon glyphicon-user"></i>&nbsp; Profil
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="link">
+                            <a ng-click="headerBarCtrl.logout()">
+                                <i class="glyphicon glyphicon-off"></i>&nbsp; Se deconnecter
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="meta">
+            <div class="page">
+                homecontrol
+            </div>
+            <div class="breadcrumb-links">
+                <cwt-breadcrumb></cwt-breadcrumb>
+            </div>
+        </div>
+    </div>
+</div>

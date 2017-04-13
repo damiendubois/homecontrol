@@ -1,0 +1,8 @@
+bower_components
+node_modules
+npm-debug.log
+backend.log
+dist
+.tmp
+homecontrol.log
+nohup.out
