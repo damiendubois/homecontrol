@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-  angular.module('app.users').component('alarm', {
+  angular.module('app.rooms').component('alarm', {
     bindings: {
       room : '<'
     },

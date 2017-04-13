@@ -102,8 +102,8 @@ function unScheduleAlarm(alarm){
 function getAlarmFunction(alarm){
   return function(){
     if(alarm.store && alarm.store.isOn){
-      console.log("alarm with store");
-      //rfService.changeStoreStatus(54791,1,"up");
+      //console.log("alarm with store");
+      rfService.changeStoreStatus(54791,1,"up");
     }
   };
 }

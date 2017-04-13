@@ -15,6 +15,7 @@ module.exports = function (app) {
   app.use('/api/rf', require('./modules/rf'));
   app.use('/api/homedef', require('./modules/homedef'));
   app.use('/api/alarm', require('./modules/alarm/api'));
+  app.use('/api/music', require('./modules/music'));
   // All undefined asset routes should return a 404
   app.route('/:url(components|app|bower_components|fonts)/*')
    .get(errors[404]);

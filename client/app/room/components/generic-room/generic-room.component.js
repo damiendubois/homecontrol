@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-  angular.module('app.users').component('genericRoom', {
+  angular.module('app.rooms').component('genericRoom', {
     bindings: {
       roomId : '<'
     },

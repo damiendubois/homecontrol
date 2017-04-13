@@ -1,0 +1,39 @@
+<div ng-if="musicCtrl.room.music && musicCtrl.room.music.host" class="roomSection">
+    <div class="section-banner">
+        <div class="section-title">Music
+        </div>
+    </div>
+    <div ng-if="musicCtrl.room.music.plug">
+        <div class="btn btn-sm btn-success " ng-click="musicCtrl.turnOnMusic()"><span class="glyphicon glyphicon-off"></span> On</div>
+        <div class="btn btn-sm btn-danger " ng-click="musicCtrl.turnOffMusic()"><span class="glyphicon glyphicon-off"></span> Off</div>
+    </div>
+    <br/><br/>
+    <div class = "form-inline">
+            <select class="form-control" id="form-small" ng-model="selectedPlaylist">
+                <option  ng-repeat="playlist in musicCtrl.playlists" value="{{playlist.file}}">{{playlist.label}}</option>
+            </select>
+            <div class="btn btn-primary btn-xs" ng-click="musicCtrl.playPlaylist(selectedPlaylist)"><span class="glyphicon glyphicon-play"></span></div>
+    </div><br/>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="btn btn-primary btn-xs">
+            <span class="glyphicon glyphicon-minus" ng-click="musicCtrl.volumeDown()"></span>&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-volume-up"></span>&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-plus" ng-click="musicCtrl.volumeUp()"></span>
+
+        </div>
+    </div><br/>
+<div>Sleep :
+ <input id="form-xs" type="number" class="input-sm form-control input" ng-model="musicCtrl.sleepMinutes"/>
+ <div class="btn btn-sm btn-primary" ng-click="musicCtrl.setSleepMusic()">Set</div>
+</div><br/>
+    <div>
+        <div class="btn btn-primary btn-xs" ng-click="musicCtrl.previousSong()"><span class="glyphicon glyphicon-step-backward"></span></div>
+        <div class="btn btn-primary btn-xs" ng-click="musicCtrl.pauseSong()"><span class="glyphicon glyphicon-pause"></span></div>
+        <div class="btn btn-primary btn-xs" ng-click="musicCtrl.playSong()"><span class="glyphicon glyphicon-play"></span></div>
+        <div class="btn btn-primary btn-xs" ng-click="musicCtrl.stopSong()"><span class="glyphicon glyphicon-stop"></span></div>
+        <div class="btn btn-primary btn-xs" ng-click="musicCtrl.nextSong()"><span class="glyphicon glyphicon-step-forward"></span></div>
+    </div>
+    <p ng-if="playingMusic">
+        {{musicCtrl.playingMusic.artist}} <br/> {{musicCtrl.playingMusic.title}}
+    </p>
+</div>

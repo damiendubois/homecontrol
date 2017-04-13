@@ -6,6 +6,5 @@ var music = require('./music-controller');
 
 router.post('/sleep', music.setSleepMusic);
 router.post('/', music.musicControl);
-router.get('/playlists',music.getGlobalPlaylists);
 
 module.exports = router;

@@ -12,7 +12,8 @@
     "start-prod": "NODE_ENV=production pm2 start dist/server/app.js --name homecontrol-prod",
     "stop-prod": "pm2 stop homecontrol-prod -i 0",
     "start-uat": "NODE_ENV=uat  pm2 start dist/server/app.js --name homecontrol-uat",
-    "stop-uat": "pm2 stop homecontrol-uat"
+    "stop-uat": "pm2 stop homecontrol-uat",
+    "log-uat": "pm2 logs homecontrol-uat"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,8 @@
     "nodemailer": "^2.7.2",
     "serve-favicon": "^2.3.0",
     "sleep": "1.1.0",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "es6-promise": "^4.1.0"
   },
   "devDependencies": {
     "gulp-less": "^3.1.0",

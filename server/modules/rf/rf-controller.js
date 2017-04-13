@@ -21,8 +21,8 @@ function changeStatus (req, res) {
 }
 
 function changeStoreStatus(req, res){
-  rfService(req.body.code,req.body.plugId,req.body.action).then(function(){
-    res.send(200);
+  rfService.changeStoreStatus(req.body.code,req.body.plugId,req.body.action).then(function(){
+    res.status(200);
   })
   .catch(function(error){
     res.status(500);

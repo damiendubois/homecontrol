@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-  angular.module('app.users').factory('AlarmService',
+  angular.module('app.rooms').factory('AlarmService',
     function($http,serverBaseUrl,Notice) {
 
       var pathToAlarm = '/alarm/';
