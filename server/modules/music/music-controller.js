@@ -21,5 +21,5 @@ exports.musicControl = function (req,res){
 //PUT
 exports.setSleepMusic = function(req,res){
   musicService.setSleepMusic(req.body.plug,req.body.host,req.body.sleepMinutes);
-  res.status(200);
+  res.status(200).json({});
 };

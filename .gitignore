@@ -6,3 +6,4 @@ dist
 .tmp
 homecontrol.log
 nohup.out
+pub

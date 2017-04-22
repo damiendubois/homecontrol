@@ -3,6 +3,7 @@
 var logger = require('../../../services/logger-service')(module);
 var alarmDAO = require('../dao/alarm-dao');
 var rfService = require('../../rf/rf-service');
+var musicService = require('../../music/music-service');
 var nodeSchedule = require('node-schedule');
 
 
@@ -90,7 +91,9 @@ function scheduleAllAlarms(){
 
 function scheduleAlarm(alarm){
   unScheduleAlarm(alarm);
-  scheduledAlarms[alarm._id] = nodeSchedule.scheduleJob(getAlarmSchedule(alarm),getAlarmFunction(alarm));
+  if(alarm.isOn){
+    scheduledAlarms[alarm._id] = nodeSchedule.scheduleJob(getAlarmSchedule(alarm),getAlarmFunction(alarm));
+  }
 }
 
 function unScheduleAlarm(alarm){
@@ -102,8 +105,22 @@ function unScheduleAlarm(alarm){
 function getAlarmFunction(alarm){
   return function(){
     if(alarm.store && alarm.store.isOn){
-      //console.log("alarm with store");
       rfService.changeStoreStatus(54791,1,"up");
+    }
+    if(alarm.music && alarm.music.isOn){
+      rfService.changePlugStatus(alarm.music.plug,1);
+      if(!alarm.music.playlist){
+        alarm.music.playlist = "/storage/music/usb/";
+      }
+      musicService.playPlaylist(alarm.music.host,alarm.music.playlist)
+      .catch(function(error){
+        logger.error(error);
+      });
+      setTimeout(function(){
+          musicService.stopMusic(alarm.music.host);
+          rfService.changePlugStatus(alarm.music.plug,0);
+        },
+        alarm.music.lastTime*60000);
     }
   };
 }

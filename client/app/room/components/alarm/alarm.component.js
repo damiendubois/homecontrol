@@ -10,7 +10,7 @@
     templateUrl: 'app/room/components/alarm/alarm.component.html'
   });
 
-  function AlarmCtrl(AlarmService) {
+  function AlarmCtrl(AlarmService,MusicService) {
       var alarmCtrl =this;
 
       angular.extend(alarmCtrl,{
@@ -29,7 +29,8 @@
           min:0,
           frequency:{},
           music : {
-            host:'chambre.local',
+            host:alarmCtrl.room.music.host,
+            plug: alarmCtrl.room.music.plug,
             playlist:'',
             lastTime:5,
             isOn : true
@@ -55,6 +56,9 @@
       function onInit(){
         AlarmService.getAlarmsForRoom(alarmCtrl.room.id).then(function(alarms){
           alarmCtrl.alarms = alarms;
+        });
+        MusicService.getPlaylists(alarmCtrl.room.music.host).then(function(playlists){
+          alarmCtrl.playlists = playlists;
         });
       }
 

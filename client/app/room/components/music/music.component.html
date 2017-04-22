@@ -33,7 +33,7 @@
         <div class="btn btn-primary btn-xs" ng-click="musicCtrl.stopSong()"><span class="glyphicon glyphicon-stop"></span></div>
         <div class="btn btn-primary btn-xs" ng-click="musicCtrl.nextSong()"><span class="glyphicon glyphicon-step-forward"></span></div>
     </div>
-    <p ng-if="playingMusic">
+    <p ng-if="musicCtrl.playingMusic">
         {{musicCtrl.playingMusic.artist}} <br/> {{musicCtrl.playingMusic.title}}
     </p>
 </div>

@@ -55,6 +55,10 @@ var AlarmSchema = new Schema({
       },
       lastTime : {
         type: Number
+      },
+      plug: {
+        FMCode:String,
+        plugNumber:String
       }
     },
     store : {

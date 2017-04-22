@@ -46,13 +46,13 @@
                 .then(function(data){
                     musicCtrl.playingMusic = data;
                 });
-            }, 10000);
+            }, 20000);
         }
 
       }
 
       function playPlaylist(playlist){
-          MusicService.playPlaylist(musicCtrl.room.host,playlist);
+          MusicService.playPlaylist(musicCtrl.room.music.host,playlist);
       }
 
       function turnOnMusic(){

@@ -3,7 +3,7 @@
           {
             "label":"homecontrol",
             "pathFromServer":"/media/",
-            "pathFromMusicPlayer":"smb://raspberypi.local"
+            "pathFromMusicPlayer":"smb://homecontrol.local"
           }
         ],
         "rooms" : [

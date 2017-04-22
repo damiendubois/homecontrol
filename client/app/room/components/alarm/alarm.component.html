@@ -4,18 +4,22 @@
             </div>
         </div>
         <div class="form-inline alarm-box" ng-repeat="alarm in alarmCtrl.alarms">
-            <div class="btn btn-sm btn-danger btn-close float-right" ng-click="alarmCtrl.removeAlarm(alarm)"><span
+            <div class="btn btn-sm btn-danger btn-close pull-right" ng-click="alarmCtrl.removeAlarm(alarm)"><span
                     class="glyphicon glyphicon-remove"></span></div>
             <div class="box-wrapper">
                 <input class="form-control input-sm" type="text" ng-model="alarm.name">
 
-                <div class="btn btn-sm form-control ">
-                    <toggle-switch ng-model="alarm.isOn">
-                        </toggle-switch>
-                </div>
+                    <toggle
+                    size="btn-sm"
+                    onstyle="btn-success"
+                    ng-model="alarm.isOn"
+                    >
+                    </toggle>
+                <br>
 
 
-                <br/>
+                <br>
+                <b>Frequency</b><br>
                 <input type="number" class="input-sm form-control input" ng-model="alarm.hour"/>:
                 <input type="number" class="input-sm form-contro input"  ng-model="alarm.min"/>
                 <div class="btn-sm btn" ng-click="alarm.frequency.monday=!alarm.frequency.monday"
@@ -39,15 +43,21 @@
                 <div class="btn-sm btn" ng-click="alarm.frequency.sunday=!alarm.frequency.sunday"
                      ng-class="{'btn-default':!alarm.frequency.sunday,'btn-primary':alarm.frequency.sunday}">su
                 </div>
-                <br/>
+                <br>
+                <br>
+                <b>Music</b>
                 <div>Stop after (min):
-                     <input type="number" class="input-sm form-control input" ng-model="alarm.lastTime"/>
+                     <input type="number" class="input-sm form-control input" ng-model="alarm.music.lastTime"/>
                     Playlist :
-                    <select class="form-control" ng-model="alarm.playlist">
-                        <option  ng-repeat="playlist in globalPlaylists" value="{{playlist.file}}">{{playlist.label}}</option>
-                        <option  ng-repeat="playlist in playlists" value="{{playlist.file}}">{{playlist.label}}</option>
+                    <select class="form-control" ng-model="alarm.music.playlist">
+                        <option  ng-repeat="playlist in alarmCtrl.playlists" value="{{playlist.file}}">{{playlist.label}}</option>
                     </select>
-                </div>
+                </div><br>
+                <b>Store</b><br>
+                <checkbox
+                  ng-model="alarm.store.isOn"
+                  name="test"
+              ></checkbox> Get the screen up<br><br>
             </div>
         </div>
         <div class="float-left btn-sm  btn btn-default" ng-click="alarmCtrl.saveAlarms()"><span

@@ -5,6 +5,7 @@
     function($http,serverBaseUrl,Notice) {
 
         var MusicService = {
+          playlists : {},
           playNext:playNext,
           shutdown:shutdown,
           playPlaylist:playPlaylist,
@@ -88,23 +89,27 @@
             }
 
          function getPlaylists (room){
-            return $http.post(serverBaseUrl+'/music',
-            {room:room,jsonToSend:{"jsonrpc": "2.0", "method": "Files.GetDirectory", "params": {"directory":"/storage/music/usb", "media":"files"}, "id": "1"}}).
-              then(function(data) {
-                var objectReturned = data;
-                try{
-                    objectReturned = JSON.parse(data);
-                }catch(e){
-                  console.log(e);
-                }
-                if(objectReturned.result && objectReturned.result.files){
-                  return objectReturned.result.files;
-                }
-                return [];
-              }).
-              catch(function() {
-                Notice.error('error');
-              });
+            if (!MusicService.playlists[room])
+            {
+              MusicService.playlists[room] = $http.post(serverBaseUrl+'/music',
+              {room:room,jsonToSend:{"jsonrpc": "2.0", "method": "Files.GetDirectory", "params": {"directory":"/storage/music/usb", "media":"files"}, "id": "1"}}).
+                then(function(serverResult) {
+                  var objectReturned = serverResult.data;
+                  try{
+                      objectReturned = JSON.parse(serverResult.data);
+                  }catch(e){
+                    console.log(e);
+                  }
+                  if(objectReturned.result && objectReturned.result.files){
+                    return objectReturned.result.files;
+                  }
+                  return [];
+                }).
+                catch(function() {
+                  Notice.error('error');
+                });
+            }
+            return MusicService.playlists[room];
           }
 
           function volumeUp(room){
@@ -144,10 +149,10 @@
           function getCurrentPlayingFile(room,callback){
             return $http.post(serverBaseUrl+'/music',
             {room:room,jsonToSend:{"jsonrpc": "2.0", "method": "Player.GetItem", "params": { "properties": ["title", "album", "artist", "duration", "thumbnail", "file", "fanart", "streamdetails"], "playerid": 0 }, "id": "AudioGetItem"}}).
-               then(function(data) {
-                 var objectReturned = data;
+               then(function(serverResult) {
+                 var objectReturned = serverResult.data;
                 try{
-                    objectReturned = JSON.parse(data);
+                    objectReturned = JSON.parse(serverResult.data);
                 }catch(e){
                   console.log(e);
                 }

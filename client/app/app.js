@@ -4,7 +4,7 @@ angular.module('app', [
     'ui.bootstrap',
     'cwt.gui',
     'ui.router',
-    'toggle-switch',
+    'ui.checkbox',
     'toastr',
     'app.layout',
     'app.config',

@@ -10,7 +10,9 @@ var sleepTimeOut;
 
 var musicService = {
   musicControl: musicControl,
-  setSleepMusic: setSleepMusic
+  setSleepMusic: setSleepMusic,
+  playPlaylist : playPlaylist,
+  stopMusic : stopMusic
 };
 
 module.exports = musicService;
@@ -18,7 +20,7 @@ module.exports = musicService;
 function musicControl (host,jsonToSend){
    var url = "http://"+host+":8080/jsonrpc";
    var execString = "curl -i -X POST -H 'Content-Type: application/json' -d '" +JSON.stringify(jsonToSend)+ "' " + url;
-   // console.log("Executing: " + execString);
+    console.log("Executing: " + execString);
    return exec(execString)
    .then(function(result){
        var outputSplited = result.stdout.split('\r\n\r\n');
@@ -29,20 +31,30 @@ function musicControl (host,jsonToSend){
    });
 }
 
-function setSleepMusic(plug,host,sleepMinutes){
+function stopMusic(host){
+  var url = "http://"+host+":8080/jsonrpc";
+  var jsonToSend='{"jsonrpc":"2.0","method":"Player.Stop","id":1,"params":{"playerid":0}}';
+  var execString = "curl -i -X POST -H 'Content-Type: application/json' -d '" +jsonToSend+ "' " + url;
+  return exec(execString);
+}
 
+function playPlaylist(host, playlist){
+  var url = "http://"+host+":8080/jsonrpc";
+  var jsonToSend='{"jsonrpc":"2.0","id":1,"method":"Player.Open","params":{"item":{"directory":"'+playlist+'"},"options":{"shuffled":true}}}';
+  var execString = "curl -i -X POST -H 'Content-Type: application/json' -d '" +jsonToSend+ "' " + url;
+  return exec(execString);
+}
+
+function setSleepMusic(plug,host,sleepMinutes){
    if(sleepTimeOut){
      clearTimeout(sleepTimeOut);
    }
    sleepTimeOut = setTimeout(
        function(){
-       var plug = plug;
-         var host = host;
-         rfService.changePlugStatus(plug,0);
-           var url = "http://"+host+"/jsonrpc";
-           var jsonToSend='{jsonrpc: "2.0", method: "Player.Stop", id: 1, params: {playerid: 0}';
+           rfService.changePlugStatus(plug,0);
+           var url = "http://"+host+":8080/jsonrpc";
+           var jsonToSend='{"jsonrpc":"2.0","method":"Player.Stop","id":1,"params":{"playerid":0}}';
            var execString = "curl -i -X POST -H 'Content-Type: application/json' -d '" +jsonToSend+ "' " + url;
-          // console.log("Executing: " + execString);
            exec(execString);
        },sleepMinutes*60000);
 }
