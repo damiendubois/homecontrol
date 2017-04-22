@@ -20,7 +20,7 @@ module.exports = musicService;
 function musicControl (host,jsonToSend){
    var url = "http://"+host+":8080/jsonrpc";
    var execString = "curl -i -X POST -H 'Content-Type: application/json' -d '" +JSON.stringify(jsonToSend)+ "' " + url;
-    console.log("Executing: " + execString);
+    //console.log("Executing: " + execString);
    return exec(execString)
    .then(function(result){
        var outputSplited = result.stdout.split('\r\n\r\n');

@@ -9476,6 +9476,9 @@ textarea ~ .form-control-highlight {
   border: solid 1px #ddd;
   border-radius: 4px;
 }
+.input-full {
+  width: 100%;
+}
 body {
   background-color: floralwhite;
 }

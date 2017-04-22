@@ -7,44 +7,54 @@
             <div class="btn btn-sm btn-danger btn-close pull-right" ng-click="alarmCtrl.removeAlarm(alarm)"><span
                     class="glyphicon glyphicon-remove"></span></div>
             <div class="box-wrapper">
-                <input class="form-control input-sm" type="text" ng-model="alarm.name">
+              <div class="pull-right">
+                <toggle
+                size="btn-sm"
+                onstyle="btn-success"
+                ng-model="alarm.isOn"
+                >
+                </toggle>
+              </div>
 
-                    <toggle
-                    size="btn-sm"
-                    onstyle="btn-success"
-                    ng-model="alarm.isOn"
-                    >
-                    </toggle>
-                <br>
+                <input class="form-control input-sm " type="text" ng-model="alarm.name">
 
-
-                <br>
-                <b>Frequency</b><br>
-                <input type="number" class="input-sm form-control input" ng-model="alarm.hour"/>:
-                <input type="number" class="input-sm form-contro input"  ng-model="alarm.min"/>
-                <div class="btn-sm btn" ng-click="alarm.frequency.monday=!alarm.frequency.monday"
-                     ng-class="{'btn-default':!alarm.frequency.monday,'btn-primary':alarm.frequency.monday}">mo
+                <br><br>
+                <div>
+                  <b>Timing</b><br>
+                  <div class="col-xs-5 col-md-2">
+                    <input type="number" class="input-full"  ng-model="alarm.hour">
+                  </div>
+                  <div class="col-xs-1 col-md-1">
+                    :
+                  </div>
+                  <div class="col-xs-5 col-md-2">
+                    <input type="number" class="input-full"  ng-model="alarm.min">
+                  </div>
+                  <div class="col-xs-12 col-md-7">
+                    <div class="btn-sm btn" ng-click="alarm.frequency.monday=!alarm.frequency.monday"
+                         ng-class="{'btn-default':!alarm.frequency.monday,'btn-primary':alarm.frequency.monday}">mo
+                    </div>
+                    <div class="btn-sm btn" ng-click="alarm.frequency.tuesday=!alarm.frequency.tuesday"
+                         ng-class="{'btn-default':!alarm.frequency.tuesday,'btn-primary':alarm.frequency.tuesday}">tu
+                    </div>
+                    <div class="btn-sm btn" ng-click="alarm.frequency.wednesday=!alarm.frequency.wednesday"
+                         ng-class="{'btn-default':!alarm.frequency.wednesday,'btn-primary':alarm.frequency.wednesday}">we
+                    </div>
+                    <div class="btn-sm btn" ng-click="alarm.frequency.thursday=!alarm.frequency.thursday"
+                         ng-class="{'btn-default':!alarm.frequency.thursday,'btn-primary':alarm.frequency.thursday}">th
+                    </div>
+                    <div class="btn-sm btn" ng-click="alarm.frequency.friday=!alarm.frequency.friday"
+                         ng-class="{'btn-default':!alarm.frequency.friday,'btn-primary':alarm.frequency.friday}">fr
+                    </div>
+                    <div class="btn-sm btn" ng-click="alarm.frequency.saturday=!alarm.frequency.saturday"
+                         ng-class="{'btn-default':!alarm.frequency.saturday,'btn-primary':alarm.frequency.saturday}">sa
+                    </div>
+                    <div class="btn-sm btn" ng-click="alarm.frequency.sunday=!alarm.frequency.sunday"
+                         ng-class="{'btn-default':!alarm.frequency.sunday,'btn-primary':alarm.frequency.sunday}">su
+                    </div>
+                  </div>
                 </div>
-                <div class="btn-sm btn" ng-click="alarm.frequency.tuesday=!alarm.frequency.tuesday"
-                     ng-class="{'btn-default':!alarm.frequency.tuesday,'btn-primary':alarm.frequency.tuesday}">tu
-                </div>
-                <div class="btn-sm btn" ng-click="alarm.frequency.wednesday=!alarm.frequency.wednesday"
-                     ng-class="{'btn-default':!alarm.frequency.wednesday,'btn-primary':alarm.frequency.wednesday}">we
-                </div>
-                <div class="btn-sm btn" ng-click="alarm.frequency.thursday=!alarm.frequency.thursday"
-                     ng-class="{'btn-default':!alarm.frequency.thursday,'btn-primary':alarm.frequency.thursday}">th
-                </div>
-                <div class="btn-sm btn" ng-click="alarm.frequency.friday=!alarm.frequency.friday"
-                     ng-class="{'btn-default':!alarm.frequency.friday,'btn-primary':alarm.frequency.friday}">fr
-                </div>
-                <div class="btn-sm btn" ng-click="alarm.frequency.saturday=!alarm.frequency.saturday"
-                     ng-class="{'btn-default':!alarm.frequency.saturday,'btn-primary':alarm.frequency.saturday}">sa
-                </div>
-                <div class="btn-sm btn" ng-click="alarm.frequency.sunday=!alarm.frequency.sunday"
-                     ng-class="{'btn-default':!alarm.frequency.sunday,'btn-primary':alarm.frequency.sunday}">su
-                </div>
-                <br>
-                <br>
+                <br><br>
                 <b>Music</b>
                 <div>Stop after (min):
                      <input type="number" class="input-sm form-control input" ng-model="alarm.music.lastTime"/>

@@ -106,24 +106,34 @@ function getAlarmFunction(alarm){
   return function(){
     if(alarm.store && alarm.store.isOn){
       rfService.changeStoreStatus(54791,1,"up");
+    //  console.log("store up");
     }
-    if(alarm.music && alarm.music.isOn){
-      rfService.changePlugStatus(alarm.music.plug,1);
-      if(!alarm.music.playlist){
-        alarm.music.playlist = "/storage/music/usb/";
+    setTimeout(function(){
+      if(alarm.music && alarm.music.isOn){
+        rfService.changePlugStatus(alarm.music.plug,1);
+        //console.log("plug on:");
+      //  console.log(alarm.music.plug);
+        if(!alarm.music.playlist){
+          alarm.music.playlist = "/storage/music/usb/";
+        }
+        musicService.playPlaylist(alarm.music.host,alarm.music.playlist)
+        .catch(function(error){
+          logger.error(error);
+        });
       }
-      musicService.playPlaylist(alarm.music.host,alarm.music.playlist)
-      .catch(function(error){
-        logger.error(error);
-      });
-      setTimeout(function(){
-          musicService.stopMusic(alarm.music.host);
-          rfService.changePlugStatus(alarm.music.plug,0);
-        },
-        alarm.music.lastTime*60000);
-    }
+    },30000);
+
+    setTimeout(function(){
+        musicService.stopMusic(alarm.music.host);
+        rfService.changePlugStatus(alarm.music.plug,0);
+        //console.log("plug off:");
+        //console.log(alarm.music.plug);
+      },
+      alarm.music.lastTime*60000);
   };
 }
+
+
 
 function getAlarmSchedule(alarm){
     return "0 " + alarm.min + " " + alarm.hour + " * * "+ getTimingFrequency(alarm.frequency)+" ";
