@@ -110,7 +110,7 @@ function getAlarmFunction(alarm){
     }
     setTimeout(function(){
       if(alarm.music && alarm.music.isOn){
-        rfService.changePlugStatus(alarm.music.plug,1);
+        rfService.changePlugStatus(alarm.music.plug,"on");
         //console.log("plug on:");
       //  console.log(alarm.music.plug);
         if(!alarm.music.playlist){
@@ -125,7 +125,7 @@ function getAlarmFunction(alarm){
 
     setTimeout(function(){
         musicService.stopMusic(alarm.music.host);
-        rfService.changePlugStatus(alarm.music.plug,0);
+        rfService.changePlugStatus(alarm.music.plug,"off");
         //console.log("plug off:");
         //console.log(alarm.music.plug);
       },
