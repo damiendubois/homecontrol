@@ -110,13 +110,15 @@ function getAlarmFunction(alarm){
     }
     setTimeout(function(){
       if(alarm.music && alarm.music.isOn){
-        rfService.changePlugStatus(alarm.music.plug,"on");
         //console.log("plug on:");
       //  console.log(alarm.music.plug);
         if(!alarm.music.playlist){
           alarm.music.playlist = "/storage/music/usb/";
         }
         musicService.playPlaylist(alarm.music.host,alarm.music.playlist)
+        .then(function(){
+          return rfService.changePlugStatus(alarm.music.plug,"on");
+        })
         .catch(function(error){
           logger.error(error);
         });

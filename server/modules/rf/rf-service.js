@@ -31,13 +31,20 @@ function changeStoreStatus(code,plug,action){
  return switchStatus(command,status);
 }
 
-
+var timeOutBeforeDown;
 function storeFullDown(code,plugId){
-  return exec(scriptStore + code+ " "+ plugId+" off").then(function(){
-    setTimeout(function(){
-      exec(scriptStore + code+ " "+ plugId + " off");
-    },36000);
-  });
+  if(timeOutBeforeDown){
+    return;
+  }
+  return exec(scriptStore + code+ " "+ plugId+" off")
+    .then(function(){
+      timeOutBeforeDown = setTimeout(function(){
+        exec(scriptStore + code+ " "+ plugId + " off")
+          .then(function(){
+            timeOutBeforeDown = null;
+          });
+      },36000);
+    });
 }
 
 function storeDown(code,plugId){

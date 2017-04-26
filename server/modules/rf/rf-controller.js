@@ -12,7 +12,7 @@ module.exports = rfController;
 
 function changeStatus (req, res) {
  rfService.changePlugStatus(req.body.plug,req.body.status).then(function(){
-   res.status(200);
+   res.status(200).json({});
  }).catch(function(error){
     res.status(500);
    logger.error(error);
@@ -22,7 +22,7 @@ function changeStatus (req, res) {
 
 function changeStoreStatus(req, res){
   rfService.changeStoreStatus(req.body.code,req.body.plugId,req.body.action).then(function(){
-    res.status(200);
+    res.status(200).json({});
   })
   .catch(function(error){
     res.status(500);
