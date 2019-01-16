@@ -3,14 +3,14 @@
 
     angular.module('app.layout').component('cwtSidebar', {
         bindings: {
-            onToggle:'&'
+            onToggle: '&'
         },
         controller: SidebarCtrl,
         controllerAs: 'sidebarCtrl',
         templateUrl: 'app/layout/components/sidebar/sidebar.component.html'
     });
 
-    function SidebarCtrl($scope, AuthService, $state,HomeDefinitionService,$stateParams) {
+    function SidebarCtrl($scope, AuthService, $state, HomeDefinitionService, $stateParams) {
         var mobileView = 992;
         var sidebarCtrl = this;
         angular.extend(sidebarCtrl, {
@@ -18,10 +18,10 @@
             getWindowWidth: getWindowWidth,
             toggleSidebar: toggleSidebar,
             hasPermission: AuthService.hasPermission,
-            stateIncludes : $state.includes,
-            getActiveRoom : getActiveRoom,
-            sidebarOpened : true,
-            items : []
+            stateIncludes: $state.includes,
+            getActiveRoom: getActiveRoom,
+            sidebarOpened: true,
+            items: []
         });
 
 
@@ -31,21 +31,25 @@
             openSidebarAtStartupIfNecessary(getWindowWidth());
         }
 
-        function loadItems(){
-          HomeDefinitionService.getHomeDefinition().then(function(homedef){
-            sidebarCtrl.items= homedef.rooms;
-          });
+        function loadItems() {
+            HomeDefinitionService.getHomeDefinition().then(function(homedef) {
+                sidebarCtrl.items = homedef.rooms;
+                if (homedef.programmables) {
+                    sidebarCtrl.programmables = true;
+                }
+            });
 
         }
-        function getActiveRoom(){
-          return $stateParams.id;
+
+        function getActiveRoom() {
+            return $stateParams.id;
         }
 
-        function openSidebarAtStartupIfNecessary(width){
+        function openSidebarAtStartupIfNecessary(width) {
             if (width >= mobileView && !sidebarCtrl.sidebarOpened) {
                 toggleSidebar();
             }
-            if(width <= mobileView && sidebarCtrl.sidebarOpened){
+            if (width <= mobileView && sidebarCtrl.sidebarOpened) {
                 toggleSidebar();
             }
         }
@@ -66,7 +70,7 @@
             sidebarCtrl.sidebarOpened = !sidebarCtrl.sidebarOpened;
             sidebarCtrl.onToggle({
                 $event: {
-                  sidebarOpened: sidebarCtrl.sidebarOpened
+                    sidebarOpened: sidebarCtrl.sidebarOpened
                 }
             });
         }

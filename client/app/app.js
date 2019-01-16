@@ -11,8 +11,10 @@ angular.module('app', [
     'app.login',
     'app.users',
     'app.profil',
-    'app.rooms'])
+    'app.rooms',
+    'app.programs'
+])
 
-.config(function ($locationProvider) {
-  $locationProvider.html5Mode(true);
+.config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
 });

@@ -1,31 +1,45 @@
 <div>
-    <music room="genericRoomCtrl.configuration"></music>
-    <alarm room="genericRoomCtrl.configuration"></alarm>
+    <music ng-if="genericRoomCtrl.configuration.music" room="genericRoomCtrl.configuration"></music>
+    <alarm ng-if="genericRoomCtrl.configuration.music" room="genericRoomCtrl.configuration"></alarm>
 
     <div class="roomSection" ng-if="genericRoomCtrl.configuration.plugs && genericRoomCtrl.configuration.plugs.length>0">
-        <div class="section-banner"><div class="section-title">Plugs
-        </div> </div>
+        <div class="section-banner">
+            <div class="section-title">Plugs
+            </div>
+        </div>
         <table class="table-condensed">
             <tr ng-repeat="plug in genericRoomCtrl.configuration.plugs">
                 <td><b>{{plug.label}} : </b></td>
-                <td><div ng-click="genericRoomCtrl.switchPlug(plug,'on')" class="btn btn-sm btn-success "><span class="glyphicon glyphicon-off"></span> On</div></td>
-                <td><div  ng-click="genericRoomCtrl.switchPlug(plug,'off')" class="btn btn-sm btn-danger "><span class="glyphicon glyphicon-off"></span> Off</div></td>
+                <td>
+                    <div ng-click="genericRoomCtrl.switchPlug(plug,'on')" class="btn btn-sm btn-success "><span class="glyphicon glyphicon-off"></span> On</div>
+                </td>
+                <td>
+                    <div ng-click="genericRoomCtrl.switchPlug(plug,'off')" class="btn btn-sm btn-danger "><span class="glyphicon glyphicon-off"></span> Off</div>
+                </td>
             </tr>
         </table>
     </div>
 
     <div class="roomSection" ng-if="genericRoomCtrl.configuration.stores && genericRoomCtrl.configuration.stores.length>0">
-        <div class="section-banner"><div class="section-title">Stores
-        </div> </div>
+        <div class="section-banner">
+            <div class="section-title">Stores
+            </div>
+        </div>
         <div ng-repeat="store in genericRoomCtrl.configuration.stores">
-        <b>{{store.label}} : </b>
-          <table class="table-condensed">
-              <tr>
-                  <td><div ng-click="genericRoomCtrl.actionStore(store,'up')" class="btn btn-sm btn-default "><span class="glyphicon glyphicon-arrow-up"></span> Up</div></td>
-                  <td><div  ng-click="genericRoomCtrl.actionStore(store,'down')" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-arrow-down"></span> Down</div></td>
-                  <td><div  ng-click="genericRoomCtrl.actionStore(store,'fulldown')" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-download-alt"></span> Full Down</div></td>
-              </tr>
-          </table>
-          </div>
+            <b>{{store.label}} : </b>
+            <table class="table-condensed">
+                <tr>
+                    <td>
+                        <div ng-click="genericRoomCtrl.actionStore(store, store.reversed ? 'down' : 'up')" class="btn btn-sm btn-default "><span class="glyphicon glyphicon-arrow-up"></span> Up</div>
+                    </td>
+                    <td>
+                        <div ng-click="genericRoomCtrl.actionStore(store,store.reversed ? 'up': 'down' )" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-arrow-down"></span> Down</div>
+                    </td>
+                    <td ng-if="store.fullDown">
+                        <div ng-click="genericRoomCtrl.actionStore(store,store.reversed ? 'fullup' : 'fulldown')" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-download-alt"></span> Full Down</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </div>

@@ -2,17 +2,26 @@
     <ul class="sidebar">
         <li class="sidebar-main">
             <a ng-click="sidebarCtrl.toggleSidebar()">
-            <img src="img/logo-cawita.png">
-            <span class="menu-icon glyphicon glyphicon-menu-hamburger"></span>
-          </a>
+                <img src="img/logo-cawita.png">
+                <span class="menu-icon glyphicon glyphicon-menu-hamburger"></span>
+            </a>
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
 
-        <div ng-repeat="sidebarItem in sidebarCtrl.items" ng-if="!sidebarCtrl.stateIncludes('app.login') && !sidebarCtrl.stateIncludes('app.forgotPassword')" >
+        <div ng-repeat="sidebarItem in sidebarCtrl.items" ng-if="!sidebarCtrl.stateIncludes('app.login') && !sidebarCtrl.stateIncludes('app.forgotPassword')">
             <li class="sidebar-list" ng-class="{active: sidebarCtrl.stateIncludes('app.rooms')&&  sidebarCtrl.getActiveRoom()==sidebarItem.id}">
                 <a ui-sref="app.rooms({id:sidebarItem.id})">
                     <i class="menu-icon  {{sidebarItem.icon}}"></i>&nbsp;
                     <span class="menu-label">{{sidebarItem.label}}  </span>
+                </a>
+            </li>
+        </div>
+
+        <div ng-if="sidebarCtrl.programmables && !sidebarCtrl.stateIncludes('app.login') && !sidebarCtrl.stateIncludes('app.forgotPassword')">
+            <li class="sidebar-list" ng-class="{active: sidebarCtrl.stateIncludes('app.program')}">
+                <a ui-sref="app.programs">
+                    <i class="menu-icon glyphicon glyphicon-time"></i>&nbsp;
+                    <span class="menu-label"> Réveil et prog  </span>
                 </a>
             </li>
         </div>
