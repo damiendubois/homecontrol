@@ -13,16 +13,37 @@
 
         angular.extend(programSetupCtrl, {
             $onInit: onInit,
-            configuration: {}
+            progConf: { stores: [] },
+            addProgram: addProgram,
+            saveProgram: saveProgram,
+            addStoreAction: addStoreAction,
+            removeStoreAction: removeStoreAction,
+            runProgram: runProgram
         });
 
         function onInit() {
-            HomeDefinitionService.getProgDefinition().then(function(roomconf) {
-                programSetupCtrl.configuration = roomconf;
+            HomeDefinitionService.getProgDefinition().then(function(progConf) {
+                programSetupCtrl.progConf = progConf;
+                weirdThingNeeded();
             });
             ProgramService.getPrograms().then(function(programs) {
                 programSetupCtrl.programs = programs;
+                weirdThingNeeded();
             });
+        }
+
+        function weirdThingNeeded() {
+            if (!programSetupCtrl.programs || !programSetupCtrl.progConf) {
+                return;
+            }
+            programSetupCtrl.programs.forEach(function(program) {
+                program.storeActions.forEach(function(storeAct) {
+                    storeAct.store = programSetupCtrl.progConf.stores.find(function(st) {
+                        return st.label === storeAct.store.label;
+                    });
+                });
+            });
+
         }
 
 
@@ -33,15 +54,32 @@
                 hour: 8,
                 min: 0,
                 frequency: {},
-                store: {
-                    isOn: true
-                }
+                storeActions: []
             };
             programSetupCtrl.programs.push(newProgram);
         }
 
+        function addStoreAction(program) {
+            var newStoreAction = {
+                action: null,
+                store: null
+            };
+            program.storeActions.push(newStoreAction);
+        }
+
+
         function saveProgram() {
             ProgramService.savePrograms(programSetupCtrl.programs);
+        }
+
+        function runProgram(program) {
+            ProgramService.runProgram(program);
+        }
+
+        function removeStoreAction(program, storeAction) {
+            program.storeActions = program.storeActions.filter(function(oneStoreAction) {
+                return storeAction !== oneStoreAction;
+            });
         }
 
         function removeProgram(programToBeRemoved) {

@@ -10,7 +10,8 @@ var programs = [];
 
 var programController = {
     get: get,
-    editAll: editAll
+    editAll: editAll,
+    runProgram: runProgram
 };
 
 
@@ -18,17 +19,30 @@ module.exports = programController;
 
 
 function editAll(req, res) {
-    programService.updateAllProgramsForRoom(req.body.programs, req.params.roomId).then(function() {
+    programService.updateAllPrograms(req.body.programs).then(function() {
         res.status(200).json({});
     }).catch(function(error) {
-        res.status(500);
+        console.log(error);
+        res.status(500).json({});
     });
 }
 
+function runProgram(req, res) {
+    try {
+        programService.runProgram(req.body.program);
+        res.status(200).json({});
+    } catch (e) {
+        console.log(error);
+        res.status(500).json({});
+    }
+
+}
+
 function get(req, res) {
-    programService.getProgramsForRoom(req.params.roomId).then(function(programs) {
+    programService.getAllPrograms().then(function(programs) {
         res.status(200).json(programs);
     }).catch(function(error) {
-        res.status(500);
+        console.log(error);
+        res.status(500).json({});
     });
 }

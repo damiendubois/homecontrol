@@ -3,7 +3,6 @@
 var logger = require('../../../services/logger-service')(module);
 var programDAO = require('../dao/program-dao');
 var rfService = require('../../rf/rf-service');
-var musicService = require('../../music/music-service');
 var nodeSchedule = require('node-schedule');
 
 
@@ -16,6 +15,7 @@ var programService = {
     scheduleAllPrograms: scheduleAllPrograms,
     updateAllPrograms: updateAllPrograms,
     getAllPrograms: getAllPrograms,
+    runProgram: runProgram
 };
 
 module.exports = programService;
@@ -24,12 +24,8 @@ function getAllPrograms() {
     return programDAO.getAll();
 }
 
-function getProgramsForRoom(roomId) {
-    return programDAO.getProgramsForRoom(roomId);
-}
-
 function addProgram(program) {
-    return programDAO.create(program.name, program.isOn, program.hour, program.min, program.frequency, program.music, program.store)
+    return programDAO.create(program.name, program.isOn, program.hour, program.min, program.frequency, program.storeActions)
         .then(function(dbProgram) {
             scheduleProgram(program);
         });
@@ -87,11 +83,20 @@ function unScheduleProgram(program) {
     }
 }
 
+function runProgram(program) {
+    return getProgramFunction(program)();
+}
+
 function getProgramFunction(program) {
-    //TODO
     return function() {
-        if (program.store && program.store.isOn) {
-            rfService.changeStoreStatus(54791, 1, "up");
+        if (program.storeActions && program.storeActions.length) {
+            program.storeActions.forEach(function(storeAction, index) {
+                var timeOutBetweenAction = 500;
+                setTimeout(function() {
+                    rfService.changeStoreStatus(storeAction.store.code, storeAction.store.plugId, storeAction.action);
+                }, index * timeOutBetweenAction);
+            });
+
         }
     };
 }
@@ -101,6 +106,9 @@ function getProgramSchedule(program) {
 }
 
 function getTimingFrequency(frequency) {
+    if (!frequency) {
+        return "*";
+    }
     var crontabFrequency = "";
     var firstFound = true;
     var days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];

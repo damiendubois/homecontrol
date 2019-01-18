@@ -61,15 +61,15 @@
             },
             {
                 "label": "Ecran de projection",
-                "code": "54793",
-                "plugId": "1",
+                "code": "54791",
+                "plugId": "2",
                 "fullDown": true,
                 "reversed": false
             },
             {
                 "label": "Store chambre",
-                "code": "54792",
-                "plugId": "1",
+                "code": "54791",
+                "plugId": "3",
                 "fullDown": false,
                 "reversed": false
             }

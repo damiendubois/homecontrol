@@ -8,7 +8,8 @@
 
             var ProgramService = {
                 getPrograms: getPrograms,
-                savePrograms: savePrograms
+                savePrograms: savePrograms,
+                runProgram: runProgram
             };
 
             function getPrograms() {
@@ -28,6 +29,16 @@
                     })
                     .catch(function(error) {
                         Notice.error("Impossible to save programs");
+                    });
+            }
+
+            function runProgram(program) {
+                return $http.post(serverBaseUrl + pathToProgram, { program: program })
+                    .then(function(result) {
+                        Notice.info("programs running ");
+                    })
+                    .catch(function(error) {
+                        Notice.error("Impossible to run the program");
                     });
             }
 

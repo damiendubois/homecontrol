@@ -40,10 +40,14 @@ var ProgramSchema = new Schema({
             type: Boolean
         }
     },
-    stores: [{
+    storeActions: [{
         action: String,
-        code: String,
-        plugId: String
+        store: {
+            label: String,
+            code: String,
+            plugId: String,
+            reversed: Boolean
+        }
     }]
 });
 

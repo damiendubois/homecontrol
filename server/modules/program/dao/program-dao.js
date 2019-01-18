@@ -32,9 +32,7 @@ function createAll(programs) {
             hour: program.hour,
             min: program.min,
             frequency: program.frequency,
-            music: program.music,
-            store: program.store,
-            room: program.room
+            storeActions: program.storeActions
         }).save();
     });
     return Promise.all(programPromises);
@@ -48,16 +46,14 @@ function getAll() {
     return Program.find();
 }
 
-function create(name, isOn, hour, minute, frequency, music, store, room) {
+function create(name, isOn, hour, minute, frequency, storeActions) {
     var newProgram = new Program({
         name: name,
         isOn: isOn,
         hour: hour,
         minute: minute,
         frequency: frequency,
-        music: music,
-        store: store,
-        room: room
+        storeActions: storeActions
     });
     // save the user
     return newProgram.save();
