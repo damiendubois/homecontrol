@@ -5,6 +5,13 @@
             "alarm": false,
             "label": "Chambre",
             "icon": "glyphicon glyphicon-bed",
+            "music": {
+                "host": "room.local",
+                "plug": {
+                    "FMCode": "00011",
+                    "plugNumber": "1"
+                }
+            },
             "plugs": [{
                 "label": "Plafonnier",
                 "FMCode": "00011",
@@ -73,6 +80,7 @@
                 "fullDown": false,
                 "reversed": false
             }
-        ]
+        ],
+        "musics": []
     }
 }

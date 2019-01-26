@@ -48,6 +48,31 @@ var ProgramSchema = new Schema({
             plugId: String,
             reversed: Boolean
         }
+    }],
+    musicActions: [{
+        playlist: {
+            type: String
+        },
+        lastTime: {
+            type: Number
+        },
+        music: {
+            label: String,
+            plug: {
+                FMCode: String,
+                plugNumber: String
+            },
+            host: {
+                type: String
+            }
+        }
+    }],
+    plugActions: [{
+        action: String,
+        plug: {
+            FMCode: String,
+            plugNumber: String
+        }
     }]
 });
 

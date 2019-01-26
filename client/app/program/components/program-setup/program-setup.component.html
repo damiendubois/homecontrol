@@ -7,9 +7,6 @@
         No program set
     </div>
     <div class="form-inline program-box" ng-repeat="program in programSetupCtrl.programs track by $index">
-        <div ng-if="$index!==0">
-            <hr>
-        </div>
         <div class="btn btn-sm btn-danger btn-close pull-right" ng-click="programSetupCtrl.removeProgram(program)"><span class="glyphicon glyphicon-remove"></span></div>
         <div class="box-wrapper">
             <div class="pull-right">
@@ -51,23 +48,50 @@
                 </div>
             </div>
             <br><br>
-            <b>Stores actions</b><br>
-            <div ng-if="program.stores.length===0"> No store action set </div>
-            <div ng-repeat="storeAction in program.storeActions" class="row">
-                <div class="col-xs-6">
-                    <select class="form-control" ng-model="storeAction.store" ng-options="store.label for store in programSetupCtrl.progConf.stores">
-                    </select>
-                    <select class="form-control" ng-model="storeAction.action">
-                        <option value="{{storeAction.store.reversed ? 'up' : 'down'}}">Down</option>
-                        <option value="{{storeAction.store.reversed ? 'down' : 'up'}}">Up</option>
-                        <option value="{{storeAction.store.reversed ? 'fullup' : 'fulldown'}}">Full Down</option>
-                    </select>
-                    <div class="btn btn-sm btn-danger btn-close" ng-click="programSetupCtrl.removeStoreAction(program, storeAction)"><span class="glyphicon glyphicon-remove"></span></div>
+            <div ng-if="programSetupCtrl.progConf.stores && programSetupCtrl.progConf.stores.length">
+                <b>Stores actions</b><br>
+                <div ng-if="program.storeActions.length===0"> No store action set </div>
+                <div ng-repeat="storeAction in program.storeActions" class="row">
+                    <div class="col-xs-12">
+                        <select class="form-control" ng-model="storeAction.store" ng-options="store.label for store in programSetupCtrl.progConf.stores">
+                        </select>
+                        <select class="form-control" ng-model="storeAction.action">
+                            <option value="{{storeAction.store.reversed ? 'up' : 'down'}}">Down</option>
+                            <option value="{{storeAction.store.reversed ? 'down' : 'up'}}">Up</option>
+                            <option value="{{storeAction.store.reversed ? 'fullup' : 'fulldown'}}">Down with stop</option>
+                        </select>
+                        <div class="btn btn-sm btn-danger btn-close" ng-click="programSetupCtrl.removeStoreAction(program, storeAction)"><span class="glyphicon glyphicon-remove"></span></div>
+                    </div>
+                </div>
+                <div class=" float-right btn btn-sm  btn-primary" ng-click="programSetupCtrl.addStoreAction(program)">
+                    <span class="glyphicon glyphicon-plus"></span> Add store action
                 </div>
             </div>
-            <div class=" float-right btn btn-sm  btn-primary" ng-click="programSetupCtrl.addStoreAction(program)">
-                <span class="glyphicon glyphicon-plus"></span> Add store action
+
+            <br><br>
+            <div ng-if="programSetupCtrl.progConf.musics && programSetupCtrl.progConf.musics.length">
+                <b>music actions</b><br>
+                <div ng-if="program.musicActions.length===0"> No music action set </div>
+                <div ng-repeat="musicAction in program.musicActions" class="row">
+
+                    <div>
+                        <select class="form-control" ng-model="musicAction.music" ng-options="music.label for music in programSetupCtrl.progConf.musics">
+                                </select> Stop after (min):
+                        <input type="number" class="input-sm form-control input" ng-model="musicAction.lastTime" /> Playlist :
+                        <select class="form-control" ng-model="musicAction.playlist">
+                           <option  ng-repeat="playlist in (programSetupCtrl.playlistsPerHost[musicAction.music.host] ? programSetupCtrl.playlistsPerHost[musicAction.music.host] : [])  " value="{{playlist.file}}">{{playlist.label}}</option>
+                       </select>
+                        <div class="btn btn-sm btn-danger btn-close" ng-click="programSetupCtrl.removeMusicAction(program, musicAction)"><span class="glyphicon glyphicon-remove"></span></div>
+
+                    </div>
+                    <br>
+
+                </div>
+                <div class=" float-right btn btn-sm  btn-primary" ng-click="programSetupCtrl.addMusicAction(program)">
+                    <span class="glyphicon glyphicon-plus"></span> Add music action
+                </div>
             </div>
+
 
         </div>
     </div>

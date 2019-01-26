@@ -9479,6 +9479,36 @@ textarea ~ .form-control-highlight {
 .input-full {
   width: 100%;
 }
+.roomSection {
+  float: left;
+  border: solid 1px #ddd;
+  padding: 10px;
+  padding-top: 0px;
+  margin: 10px;
+  border-radius: 4px;
+}
+.section-title {
+  margin-left: 5px;
+  font-size: 20px;
+  color: #FAFAD2;
+}
+.section-banner {
+  background-color: #B0C4DE;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: 10px;
+  border-radius-top-left: 4px;
+  border-radius-top-right: 4px;
+}
+.program-box {
+  padding: 5px;
+  border: solid 1px #080303;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+.input-full {
+  width: 100%;
+}
 body {
   background-color: floralwhite;
 }

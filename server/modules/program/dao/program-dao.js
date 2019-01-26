@@ -32,7 +32,9 @@ function createAll(programs) {
             hour: program.hour,
             min: program.min,
             frequency: program.frequency,
-            storeActions: program.storeActions
+            storeActions: program.storeActions,
+            musicActions: program.musicActions,
+            plugActions: program.plugActions
         }).save();
     });
     return Promise.all(programPromises);
@@ -46,14 +48,16 @@ function getAll() {
     return Program.find();
 }
 
-function create(name, isOn, hour, minute, frequency, storeActions) {
+function create(name, isOn, hour, minute, frequency, storeActions, musicActions, plugActions) {
     var newProgram = new Program({
         name: name,
         isOn: isOn,
         hour: hour,
         minute: minute,
         frequency: frequency,
-        storeActions: storeActions
+        storeActions: storeActions,
+        musicActions: musicActions,
+        plugActions: plugActions
     });
     // save the user
     return newProgram.save();

@@ -5,7 +5,7 @@ var userDao = require('../dao/user-dao');
 var jwt = require('jwt-simple');
 var config = require('../../../config/environment');
 var logger = require('../../../services/logger-service')(module);
-var tokenExpirationLength = 3;
+var tokenExpirationLength = 999999;
 var NUMBER_OF_AUTHORIZED_ATTEMPTS = 10;
 
 var loggingService = {
@@ -31,7 +31,7 @@ function checkPermission(permissions) {
         }
         userDao.getByName(decodedCredentials.name)
             .then(function(user) {
-                if(user.lock.adminLock){
+                if (user.lock.adminLock) {
                     return res.status(423).send({
                         success: false,
                         msg: 'User locked'
@@ -67,26 +67,26 @@ function logUser(req, res) {
                     msg: 'Authentication failed.'
                 });
             }
-            if(user.lock.adminLock || (user.lock.lockUntil && (new Date(user.lock.lockUntil)>new Date()))){
-              return res.status(423).send({
-                  success: false,
-                  msg: 'User is locked.'
-              });
+            if (user.lock.adminLock || (user.lock.lockUntil && (new Date(user.lock.lockUntil) > new Date()))) {
+                return res.status(423).send({
+                    success: false,
+                    msg: 'User is locked.'
+                });
             }
             user.comparePassword(req.body.password, function(err, isMatch) {
                 if (!isMatch || err) {
-                  return addAttemptAndLockIfNecessary(user)
-                  .then(function(user){
-                     res.status(400).send({
-                        success: false,
-                        msg: 'Authentication failed.'
-                    });
-                  });
+                    return addAttemptAndLockIfNecessary(user)
+                        .then(function(user) {
+                            res.status(400).send({
+                                success: false,
+                                msg: 'Authentication failed.'
+                            });
+                        });
                 }
-								createNewTokenForUser(user, getIP(req), req.headers['user-agent'])
-									.then(function(uiToken){
-										res.json(uiToken);
-									});
+                createNewTokenForUser(user, getIP(req), req.headers['user-agent'])
+                    .then(function(uiToken) {
+                        res.json(uiToken);
+                    });
             });
         })
         .catch(function(error) {
@@ -95,65 +95,65 @@ function logUser(req, res) {
 
 }
 
-function getIP(req){
-  if(req.connection && req.connection.remoteAddress){
-    return req.connection.remoteAddress.replace('::ffff:','');
-  }
-  return 'Hidden';
+function getIP(req) {
+    if (req.connection && req.connection.remoteAddress) {
+        return req.connection.remoteAddress.replace('::ffff:', '');
+    }
+    return 'Hidden';
 }
 
 
-function addAttemptAndLockIfNecessary(user){
-    if(!user.lock.loggingAttempt){
-      user.lock.loggingAttempt=0;
+function addAttemptAndLockIfNecessary(user) {
+    if (!user.lock.loggingAttempt) {
+        user.lock.loggingAttempt = 0;
     }
-    user.lock.loggingAttempt+=1;
-    if(user.lock.loggingAttempt===NUMBER_OF_AUTHORIZED_ATTEMPTS){
-      user.lock.lockingTime = new Date();
-      user.lock.lockUntil = new Date();
-      user.lock.lockUntil.setDate(user.lock.lockUntil.getDate() + 1);
-      user.lock.loggingAttempt = 0;
+    user.lock.loggingAttempt += 1;
+    if (user.lock.loggingAttempt === NUMBER_OF_AUTHORIZED_ATTEMPTS) {
+        user.lock.lockingTime = new Date();
+        user.lock.lockUntil = new Date();
+        user.lock.lockUntil.setDate(user.lock.lockUntil.getDate() + 1);
+        user.lock.loggingAttempt = 0;
     }
-    return user.save().catch(function(error){
-      logger.error(error);
+    return user.save().catch(function(error) {
+        logger.error(error);
     });
 }
 
-function createNewTokenForUser(user,ip,userAgent){
-  user.lock.loggingAttempt=0;
-	var connexionToken = generateToken();
-	var expirationDate = new Date();
-	var creationDate = new Date();
-	expirationDate.setDate(expirationDate.getDate() + tokenExpirationLength);
-	if (!user.connexionTokens) {
-			user.connexionTokens = [];
-	}
-	user.connexionTokens.push({
-			value: connexionToken,
-			expirationDate: expirationDate,
-			ip: ip,
-			userAgent: userAgent,
-			creationDate: creationDate
-	});
-	return user.save()
-		.then(function() {
-					var userToEncode = {
-							name: user.name,
-							connexionToken: connexionToken,
-							expirationDate: expirationDate
-					};
-					// if user is found and password is right create a token
-					var token = jwt.encode(userToEncode, config.secret);
-					// return the information including token as JSON
-					return {
-							success: true,
-							token: 'JWT ' + token,
-							permissions: user.permissions
-					};
-	})
-	.catch(function(error){
-		logger.error(error);
-	});
+function createNewTokenForUser(user, ip, userAgent) {
+    user.lock.loggingAttempt = 0;
+    var connexionToken = generateToken();
+    var expirationDate = new Date();
+    var creationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + tokenExpirationLength);
+    if (!user.connexionTokens) {
+        user.connexionTokens = [];
+    }
+    user.connexionTokens.push({
+        value: connexionToken,
+        expirationDate: expirationDate,
+        ip: ip,
+        userAgent: userAgent,
+        creationDate: creationDate
+    });
+    return user.save()
+        .then(function() {
+            var userToEncode = {
+                name: user.name,
+                connexionToken: connexionToken,
+                expirationDate: expirationDate
+            };
+            // if user is found and password is right create a token
+            var token = jwt.encode(userToEncode, config.secret);
+            // return the information including token as JSON
+            return {
+                success: true,
+                token: 'JWT ' + token,
+                permissions: user.permissions
+            };
+        })
+        .catch(function(error) {
+            logger.error(error);
+        });
 }
 
 function isCredentialOutdated(credential) {

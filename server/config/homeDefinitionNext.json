@@ -1,0 +1,97 @@
+{
+    "musicSources": [{
+        "label": "homecontrol",
+        "pathFromServer": "/media/",
+        "pathFromMusicPlayer": "smb://homecontrol.local"
+    }],
+    "rooms": [{
+            "id": "Room",
+            "alarm": false,
+            "label": "Chambre",
+            "icon": "glyphicon glyphicon-bed",
+            "music": {
+                "host": "room.local",
+                "plug": {
+                    "FMCode": "00011",
+                    "plugNumber": "1"
+                }
+            },
+            "plugs": [{
+                "label": "Plafonnier",
+                "FMCode": "00011",
+                "plugNumber": "3"
+            }],
+            "stores": [{
+                "label": "Store chambre",
+                "code": "54792",
+                "plugId": "1",
+                "fullDown": false,
+                "reversed": false
+            }]
+        },
+        {
+            "label": "Salon",
+            "alarm": false,
+            "icon": " glyphicon glyphicon-facetime-video",
+            "id": "livingroom",
+            "plugs": [{
+                    "label": "Lumière Armoire",
+                    "FMCode": "01111",
+                    "plugNumber": "4"
+                },
+                {
+                    "label": "Lumière canapé",
+                    "FMCode": "01111",
+                    "plugNumber": "1"
+                }
+            ],
+            "stores": [{
+                    "label": "Store salon",
+                    "code": "54791",
+                    "plugId": "1",
+                    "fullDown": false,
+                    "reversed": true
+                },
+                {
+                    "label": "Ecran de projection",
+                    "code": "54793",
+                    "plugId": "1",
+                    "fullDown": true,
+                    "reversed": false
+                }
+            ]
+        }
+    ],
+    "programmables": {
+        "stores": [{
+                "label": "Store salon",
+                "code": "54791",
+                "plugId": "1",
+                "fullDown": false,
+                "reversed": true
+            },
+            {
+                "label": "Ecran de projection",
+                "code": "54791",
+                "plugId": "2",
+                "fullDown": true,
+                "reversed": false
+            },
+            {
+                "label": "Store chambre",
+                "code": "54791",
+                "plugId": "3",
+                "fullDown": false,
+                "reversed": false
+            }
+        ],
+        "musics": [{
+            "label": "Chambre",
+            "host": "room.local",
+            "plug": {
+                "FMCode": "00011",
+                "plugNumber": "1"
+            }
+        }]
+    }
+}
