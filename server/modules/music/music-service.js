@@ -5,7 +5,6 @@ var util = require('util');
 var exec = require('child-process-promise').exec;
 var sleep = require('sleep');
 var rfService = require('../rf/rf-service');
-var Q = require('q');
 var sleepTimeOut;
 
 var musicService = {

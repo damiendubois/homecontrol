@@ -6,7 +6,6 @@ var sleep = require('sleep');
 var scriptPlug = "sudo /home/pi/wiringPi/433Utils/RPi_utils/send";
 var scriptStore = "sudo piHomeEasy 0 ";
 var storeFullTimeOut = 33000;
-var Q = require("q");
 var rfController = {
     changePlugStatus: changePlugStatus,
     changeStoreStatus: changeStoreStatus
