@@ -8,7 +8,7 @@
         templateUrl: 'app/program/components/program-setup/program-setup.component.html'
     });
 
-    function ProgramSetupCtrl(HomeDefinitionService, ProgramService) {
+    function ProgramSetupCtrl(HomeDefinitionService, ProgramService, MusicService) {
         var programSetupCtrl = this;
 
         angular.extend(programSetupCtrl, {
@@ -22,6 +22,8 @@
             removeProgram: removeProgram,
             addMusicAction: addMusicAction,
             removeMusicAction: removeMusicAction,
+            addPlugAction: addPlugAction,
+            removePlugAction: removePlugAction,
             playlistsPerHost: {}
         });
 
@@ -31,7 +33,7 @@
                 weirdThingNeeded();
                 progConf.musics.forEach(function(music) {
                     MusicService.getPlaylists(music.host).then(function(playlists) {
-                        programSetupCtrl.playlists[music.host] = playlists;
+                        programSetupCtrl.playlistsPerHost[music.host] = playlists;
                     });
                 });
             });
@@ -62,6 +64,14 @@
                         return mus.label === musicAct.music.label;
                     });
                 });
+                program.plugActions.forEach(function(plugAct) {
+                    if (!plugAct.plug || !plugAct.plug.label) {
+                        return;
+                    }
+                    plugAct.plug = programSetupCtrl.progConf.plugs.find(function(plug) {
+                        return plug.label === plugAct.plug.label;
+                    });
+                });
             });
 
         }
@@ -74,7 +84,9 @@
                 hour: 8,
                 min: 0,
                 frequency: {},
-                storeActions: []
+                storeActions: [],
+                plugActions: [],
+                musicActions: []
             };
             programSetupCtrl.programs.push(newProgram);
         }
@@ -96,6 +108,14 @@
             program.musicActions.push(newMusicAction);
         }
 
+        function addPlugAction(program) {
+            var newPlugAction = {
+                plug: null,
+                action: null,
+            };
+            program.plugActions.push(newPlugAction);
+        }
+
 
         function saveProgram() {
             ProgramService.savePrograms(programSetupCtrl.programs);
@@ -114,6 +134,12 @@
         function removeMusicAction(program, musicAction) {
             program.musicActions = program.musicActions.filter(function(oneMusicAction) {
                 return musicAction !== oneMusicAction;
+            });
+        }
+
+        function removePlugAction(program, plugAction) {
+            program.plugActions = program.plugActions.filter(function(onePlugAction) {
+                return plugAction !== onePlugAction;
             });
         }
 

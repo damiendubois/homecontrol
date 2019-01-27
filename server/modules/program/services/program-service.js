@@ -91,7 +91,7 @@ function runProgram(program) {
 function getProgramFunction(program) {
     return function() {
         var startingTimeOut = 0;
-        var timeOutBetweenAction = 500;
+        var timeOutBetweenAction = 1000;
         if (program.storeActions && program.storeActions.length) {
             program.storeActions.forEach(function(storeAction, index) {
                 setTimeout(function() {

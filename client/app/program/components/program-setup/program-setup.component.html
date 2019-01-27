@@ -92,6 +92,25 @@
                 </div>
             </div>
 
+            <br><br>
+            <div ng-if="programSetupCtrl.progConf.plugs && programSetupCtrl.progConf.plugs.length">
+                <b>Plug actions</b><br>
+                <div ng-if="program.plugActions.length===0"> No plug action set </div>
+                <div ng-repeat="plugAction in program.plugActions" class="row">
+                    <div class="col-xs-12">
+                        <select class="form-control" ng-model="plugAction.plug" ng-options="plug.label for plug in programSetupCtrl.progConf.plugs">
+                        </select>
+                        <select class="form-control" ng-model="plugAction.action">
+                            <option value="on">on</option>
+                            <option value="off">off</option>
+                        </select>
+                        <div class="btn btn-sm btn-danger btn-close" ng-click="programSetupCtrl.removePlugAction(program, plugAction)"><span class="glyphicon glyphicon-remove"></span></div>
+                    </div>
+                </div>
+                <div class=" float-right btn btn-sm  btn-primary" ng-click="programSetupCtrl.addPlugAction(program)">
+                    <span class="glyphicon glyphicon-plus"></span> Add plug action
+                </div>
+            </div>
 
         </div>
     </div>

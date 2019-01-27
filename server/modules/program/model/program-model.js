@@ -70,6 +70,7 @@ var ProgramSchema = new Schema({
     plugActions: [{
         action: String,
         plug: {
+            label: String,
             FMCode: String,
             plugNumber: String
         }

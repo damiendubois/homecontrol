@@ -1,9 +1,5 @@
 {
-    "musicSources": [{
-        "label": "homecontrol",
-        "pathFromServer": "/media/",
-        "pathFromMusicPlayer": "smb://homecontrol.local"
-    }],
+    "musicSources": [],
     "rooms": [{
             "id": "Room",
             "alarm": false,
@@ -92,6 +88,27 @@
                 "FMCode": "00011",
                 "plugNumber": "1"
             }
-        }]
+        }],
+        "plugs": [{
+                "label": "Lumière Armoire",
+                "FMCode": "01111",
+                "plugNumber": "4"
+            },
+            {
+                "label": "Lumière canapé",
+                "FMCode": "01111",
+                "plugNumber": "1"
+            },
+            {
+                "label": "Plafonnier chambre",
+                "FMCode": "00011",
+                "plugNumber": "3"
+            },
+            {
+                "label": "Enceintes chambre",
+                "FMCode": "00011",
+                "plugNumber": "1"
+            }
+        ]
     }
 }

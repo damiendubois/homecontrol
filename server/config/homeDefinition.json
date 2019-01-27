@@ -9,7 +9,7 @@
                 "host": "room.local",
                 "plug": {
                     "FMCode": "00011",
-                    "plugNumber": "1"
+                    "plugNumber": "4"
                 }
             },
             "plugs": [{
@@ -32,13 +32,18 @@
             "id": "livingroom",
             "plugs": [{
                     "label": "Lumière Armoire",
-                    "FMCode": "01111",
-                    "plugNumber": "4"
+                    "FMCode": "00011",
+                    "plugNumber": "1"
                 },
                 {
                     "label": "Lumière canapé",
-                    "FMCode": "01111",
-                    "plugNumber": "1"
+                    "FMCode": "00011",
+                    "plugNumber": "2"
+                },
+                {
+                    "label": "Chargeur bureau",
+                    "FMCode": "00011",
+                    "plugNumber": "3"
                 }
             ],
             "stores": [{
@@ -68,19 +73,47 @@
             },
             {
                 "label": "Ecran de projection",
-                "code": "54791",
-                "plugId": "2",
+                "code": "54793",
+                "plugId": "1",
                 "fullDown": true,
                 "reversed": false
             },
             {
                 "label": "Store chambre",
-                "code": "54791",
-                "plugId": "3",
+                "code": "54792",
+                "plugId": "1",
                 "fullDown": false,
                 "reversed": false
             }
         ],
-        "musics": []
+        "musics": [{
+            "label": "Chambre",
+            "host": "room.local",
+            "plug": {
+                "FMCode": "00011",
+                "plugNumber": "1"
+            }
+        }],
+        "plugs": [{
+                "label": "Lumière Armoire",
+                "FMCode": "01111",
+                "plugNumber": "4"
+            },
+            {
+                "label": "Lumière canapé",
+                "FMCode": "01111",
+                "plugNumber": "1"
+            },
+            {
+                "label": "Plafonnier chambre",
+                "FMCode": "00011",
+                "plugNumber": "3"
+            },
+            {
+                "label": "Enceintes chambre",
+                "FMCode": "00011",
+                "plugNumber": "1"
+            }
+        ]
     }
 }
